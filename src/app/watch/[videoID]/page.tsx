@@ -41,9 +41,9 @@ const page = () => {
   return (
     <div className="mx-auto flex  gap-20 justify-center px-10">
   {videoInfo && (
-    <div className=" w-[800px] mt-10 items-center"> {/* Tailwind classes for centering */}
+    <div className=" mt-10 items-center"> {/* Tailwind classes for centering */}
       <video 
-        className="w-[800px] rounded-md"
+        className="max-h-[400px] w-[800px] rounded-md"
         controls 
         muted
         src={`https://deafo668hdkn6.cloudfront.net/${videoInfo.url.S}`} 
