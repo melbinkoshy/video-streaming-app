@@ -47,7 +47,7 @@ const page = () => {
         controls 
         src={`https://deafo668hdkn6.cloudfront.net/${videoInfo.url.S}`} 
     />
-    <div className="flex justify-between mt-10 px-10">
+    <div className="flex justify-between mt-10 lg:px-10">
       <div className="text-left   ">
         <div className="font-bold text-[26px]">{videoInfo.title.S}</div>
       <p className="text-sm">{videoInfo.description?.S}</p>
@@ -56,7 +56,7 @@ const page = () => {
       </div>
     </div>
   )}
-    <div className="flex-shrink ">
+    <div className="hidden lg:flex-shrink ">
         {
           videoList.map((item)=>{
             return(

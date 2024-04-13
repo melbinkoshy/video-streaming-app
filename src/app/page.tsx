@@ -21,7 +21,7 @@ export default function Home() {
   console.log(videoList)
 
   return (
-    <div className="px-44 py-10">
+    <div className="px-5 lg:px-44 py-10">
     
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
