@@ -14,6 +14,7 @@ const dbClient = new DynamoDBClient({
     secretAccessKey:process.env.NEXT_PUBLIC_SECRET_KEY as string,
   },
   region: process.env.NEXT_PUBLIC_REGION,
+   apiVersion: "2012-08-10" 
 });
 
 export const docClient = DynamoDBDocumentClient.from(dbClient);
@@ -48,15 +49,24 @@ export const createVideoEntry = async (video:any) => {
   }
 };
 
-// export const GetAllVideos = async () => {
-//   const command = new GetCommand({
-//     TableName: "pixel-play-videos",
-//     Key: {
-//       // CommonName: "Shoebill",
-//     },
-//   });
 
-//   const response = await DocumentClient.scan;
-//   console.log(response);
-//   return response;
-// };
+
+export const Getuser = async (userId:string) => {
+  const params = {
+    TableName: "users",
+    Key: {
+      userid: userId // Assuming UserId is the primary key of your table
+    }
+  };
+  try {
+   
+    const command = new GetCommand(params);
+    const response = await docClient.send(command);
+    console.log('Scan succeeded:', response.Item);
+    return response.Item;
+  
+  } catch (error) {
+    console.error('Unable to scan the table. Error JSON:', JSON.stringify(error, null, 2));
+    throw error;
+  }
+}

@@ -38,7 +38,7 @@ export function Navbar() {
         <Input placeholder='search' className='rounded-full w-[350px]'/>
         
         </div>
-        <div className=" ">
+        <div className="space-x-6">
           <Link href={"/upload"}>
           <button
             type="button"
@@ -47,7 +47,14 @@ export function Navbar() {
             Upload Video
           </button>
           </Link>
-
+          <Link href={"/login"}>
+          <button
+            type="button"
+            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          >
+            login
+          </button>
+          </Link>
         </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />

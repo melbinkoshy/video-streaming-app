@@ -1,10 +1,13 @@
 "use client"
 import VideoCard from "@/components/VideoCard";
+import { useUserStore } from "@/store/store";
 import { Spinner } from "@nextui-org/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+  const{username,premium}=useUserStore();
+
   const [videoList,setVideoList] = useState([])
   useEffect(()=>{
     const getVideos=async()=>{
@@ -22,19 +25,12 @@ export default function Home() {
 
   return (
     <div className="px-5 lg:px-44 py-10">
-    
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
-        {
-          videoList.map((item)=>{
-            return(
-              <VideoCard video={item}/>
-            )
-          })
-        }
-
-      </div>
-
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
+      {videoList
+        .filter(video => premium || !video.premium) // Filter videos based on premium status
+        .map(item => <VideoCard key={item.id} video={item} />) // Render VideoCard for each filtered video
+      }
     </div>
+  </div>
   );
 }
