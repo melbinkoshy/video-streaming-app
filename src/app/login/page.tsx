@@ -16,8 +16,8 @@ export default function Component() {4
     try {
       const response=await Getuser(user)
       setUserData(response.userid,response.premium)
+      
       toast.success("logged in successfully")
-
   } catch (error) {
     toast.error("Failed login")
   }

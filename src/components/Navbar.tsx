@@ -1,60 +1,70 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { Menu, Search, X } from 'lucide-react'
-import { Input } from './ui/input'
-import Link from 'next/link'
+import React from "react";
+import { Menu, Search, X } from "lucide-react";
+import { Input } from "./ui/input";
+import Link from "next/link";
+import { useUserStore } from "@/store/store";
 
 const menuItems = [
   {
-    name: 'Home',
-    href: '#',
+    name: "Home",
+    href: "#",
   },
   {
-    name: 'About',
-    href: '#',
+    name: "About",
+    href: "#",
   },
   {
-    name: 'Contact',
-    href: '#',
+    name: "Contact",
+    href: "#",
   },
-]
+];
 
 export function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { username, premium } = useUserStore();
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div className="relative w-full bg-white p-4">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="inline-flex items-center space-x-2">
-          
-          <Link href="/"><span className="font-bold">Pixel Play</span></Link>
+          <Link href="/">
+            <span className="font-bold">Pixel Play</span>
+          </Link>
         </div>
         <div className="hidden lg:block">
-        <Input placeholder='search' className='rounded-full w-[350px]'/>
-        
+          <Input placeholder="search" className="rounded-full w-[350px]" />
         </div>
-        <div className="space-x-6">
-          <Link href={"/upload"}>
-          <button
-            type="button"
-            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          >
-            Upload Video
-          </button>
-          </Link>
-          <Link href={"/login"}>
-          <button
-            type="button"
-            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          >
-            login
-          </button>
-          </Link>
+        <div className="flex gap-3 items-center">
+          {username && (
+            <Link href={"/upload"}>
+              <button
+                type="button"
+                className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                Upload Video
+              </button>
+            </Link>
+          )}
+          {!username && (
+            <Link href={"/login"}>
+              <button
+                type="button"
+                className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                login
+              </button>
+            </Link>
+          )}
+          {premium ? (
+            <div >Premium User : <span className="font-semibold">{username}</span></div>
+          ) : (
+            <div>Non Premium User</div>
+          )}
         </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
@@ -119,5 +129,5 @@ export function Navbar() {
         )}
       </div>
     </div>
-  )
+  );
 }
